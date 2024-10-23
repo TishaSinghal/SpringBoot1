@@ -58,7 +58,7 @@ public class EdistrictController {
         	 model.addAttribute("name", name);
              model.addAttribute("email", email);
              System.out.println("model added");
-        	//userInfoService.saveUserInfo(name, email, keyy);
+        	userInfoService.saveUserInfo(name, email, keyy);
         	System.out.println("Database stored");
             return "show"; 
         } else {

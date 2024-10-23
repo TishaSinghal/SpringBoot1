@@ -14,6 +14,7 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import jakarta.persistence.EntityManagerFactory;
+import java.util.Properties; 
 
 
 @Configuration
@@ -29,7 +30,7 @@ public class JpaConfig {
 	        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
 	        dataSource.setUrl("jdbc:mysql://localhost:3306/edistrict_user");
 	        dataSource.setUsername("root");
-	        dataSource.setPassword("Tisha@123");
+	        dataSource.setPassword("password");
 	        return dataSource;
 	    }
 	 
@@ -39,6 +40,16 @@ public class JpaConfig {
         em.setDataSource(dataSource);
         em.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
         em.setPackagesToScan("com.sabpaisa.edistrict.eDistrictHimachal.model");
+        
+
+        // Set Hibernate properties
+        Properties jpaProperties = new Properties();
+        jpaProperties.put("hibernate.dialect", "org.hibernate.dialect.MySQL8Dialect");  // Set the dialect explicitly
+        jpaProperties.put("hibernate.hbm2ddl.auto", "update");  // Automatically creates/updates schema
+        jpaProperties.put("hibernate.show_sql", "true"); 
+        em.setJpaProperties(jpaProperties);
+        
+        
         return em;
     }
 
